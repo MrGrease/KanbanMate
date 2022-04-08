@@ -1,4 +1,4 @@
-using KanbanMate.Data;
+using KanbanMate.DataAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

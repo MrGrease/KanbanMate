@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace KanbanMate.Data
+namespace KanbanMate.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext
     {

@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KanbanMate.DataAccess\KanbanMate.DataAccess.csproj" />
+    <ProjectReference Include="..\KanbanMate.Models\KanbanMate.Models.csproj" />
+  </ItemGroup>
+
 </Project>
