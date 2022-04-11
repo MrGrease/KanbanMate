@@ -11,6 +11,11 @@ namespace KanbanMate.DataAccess
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Project> projects { get; set; }
         public DbSet<Phase> phases { get; set; }
         public DbSet<Models.Task> tasks { get; set; }
