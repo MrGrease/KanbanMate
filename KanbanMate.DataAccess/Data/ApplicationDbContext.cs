@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using KanbanMate.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace KanbanMate.DataAccess
@@ -9,5 +10,10 @@ namespace KanbanMate.DataAccess
             : base(options)
         {
         }
+
+        public DbSet<Project> projects { get; set; }
+        public DbSet<Phase> phases { get; set; }
+        public DbSet<Models.Task> tasks { get; set; }
+
     }
 }
