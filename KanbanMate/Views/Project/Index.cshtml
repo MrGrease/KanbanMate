@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Project>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+<h1 class="col-md-11">Projects</h1>
+<a class="btn btn-primary col-md-1" asp-controller="Project" asp-action="Create">Create Project</a>
+</div>
+<hr/>
+
+<div class="row">
+@foreach(var obj in Model){
+
+    <div class="col-md-3">
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">@obj.Title</h5>
+    <p class="card-text">@obj.Description</p>
+    <a href="#" class="btn btn-primary">Open</a>
+  </div>
+</div>
+</div>
+}
+</div>

@@ -19,6 +19,5 @@ namespace KanbanMate.DataAccess
         public DbSet<Project> projects { get; set; }
         public DbSet<Phase> phases { get; set; }
         public DbSet<Models.Task> tasks { get; set; }
-
     }
 }
