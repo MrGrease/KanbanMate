@@ -7,6 +7,6 @@ namespace KanbanMate.Models
         [Key]
         public int Id { get; set; }
         public string Title { get; set; }
-        public ICollection<Project> Project { get; set; }   
+        public Project project{ get; set; }   
     }
 }
