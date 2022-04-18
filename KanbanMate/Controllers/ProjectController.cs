@@ -1,4 +1,5 @@
 ﻿using KanbanMate.DataAccess;
+using KanbanMate.DataAccess.Repository.IRepository;
 using KanbanMate.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,15 +7,15 @@ namespace KanbanMate.Controllers
 {
     public class ProjectController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProjectController(ApplicationDbContext db)
+        public ProjectController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            IEnumerable<Project> objProjectList = _db.projects;
+            IEnumerable<Project> objProjectList = _unitOfWork.Project.GetAll();
             return View(objProjectList);
         }
 
@@ -29,8 +30,8 @@ namespace KanbanMate.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.projects.Add(obj);
-                _db.SaveChanges();
+                _unitOfWork.Project.Add(obj);
+                _unitOfWork.Project.Save();
                 return RedirectToAction("Index");
             }
             else
@@ -45,7 +46,7 @@ namespace KanbanMate.Controllers
             {
                 return NotFound();
             }
-            var projectFromDb = _db.projects.Single(p => p.Id == id);
+            var projectFromDb = _unitOfWork.Project.GetFirstOrDefault(p => p.Id == id);
             if (projectFromDb == null)
             {
                 return NotFound();
@@ -60,8 +61,8 @@ namespace KanbanMate.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.projects.Update(obj);
-                _db.SaveChanges();
+                _unitOfWork.Project.Update(obj);
+                _unitOfWork.Project.Save();
                 return RedirectToAction("Index");
             }
             else
@@ -77,7 +78,7 @@ namespace KanbanMate.Controllers
             {
                 return NotFound();
             }
-            var projectFromDb = _db.projects.Single(p => p.Id == id);
+            var projectFromDb = _unitOfWork.Project.GetFirstOrDefault(p => p.Id == id);
             if (projectFromDb == null)
             {
                 return NotFound();
@@ -90,8 +91,8 @@ namespace KanbanMate.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(Project obj)
         {
-                _db.projects.Remove(obj);
-                _db.SaveChanges();
+            _unitOfWork.Project.Remove(obj);
+            _unitOfWork.Project.Save();
                 return RedirectToAction("Index");
         }
     }
