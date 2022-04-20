@@ -11,12 +11,13 @@ namespace KanbanMate.Controllers
     public class ProjectController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
 
 
-        public ProjectController(IUnitOfWork unitOfWork)
+        public ProjectController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         [Authorize]
@@ -36,10 +37,12 @@ namespace KanbanMate.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public IActionResult Create(Project obj)
+        public async Task<IActionResult> CreateAsync(Project obj)
         {
             if (ModelState.IsValid)
             {
+                AppUser user = await _userManager.GetUserAsync(User);
+                obj.users.Add(user);
                 _unitOfWork.Project.Add(obj);
                 _unitOfWork.Project.Save();
                 return RedirectToAction("Index");

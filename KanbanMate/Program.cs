@@ -1,6 +1,7 @@
 using KanbanMate.DataAccess;
 using KanbanMate.DataAccess.Repository;
 using KanbanMate.DataAccess.Repository.IRepository;
+using KanbanMate.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,8 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<AppUser>().AddEntityFrameworkStores<ApplicationDbContext>();
+
 
 builder.Services.AddControllersWithViews();
 
