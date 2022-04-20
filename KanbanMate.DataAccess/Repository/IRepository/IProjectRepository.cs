@@ -9,6 +9,7 @@ namespace KanbanMate.DataAccess.Repository.IRepository
 {
     public interface IProjectRepository : IRepository<Project>
     {
+        IEnumerable<Project> Where(string id);
         void Update(Project obj);
 
         void Save();

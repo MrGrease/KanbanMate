@@ -26,5 +26,11 @@ namespace KanbanMate.DataAccess.Repository
         {
             _db.projects.Update(obj);
         }
+
+        public IEnumerable<Project> Where(string userId)
+        {
+            return _db.projects.Where(x => x.users.Any(x =>
+                    x.Id == userId)).ToList();
+        }
     }
 }

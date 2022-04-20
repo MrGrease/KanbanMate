@@ -1,24 +1,33 @@
 ﻿using KanbanMate.DataAccess;
 using KanbanMate.DataAccess.Repository.IRepository;
 using KanbanMate.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace KanbanMate.Controllers
 {
     public class ProjectController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<IdentityUser> _userManager;
+
 
         public ProjectController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
-            IEnumerable<Project> objProjectList = _unitOfWork.Project.GetAll();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            IEnumerable<Project> objProjectList = _unitOfWork.Project.Where(userId);
             return View(objProjectList);
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -26,6 +35,7 @@ namespace KanbanMate.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Create(Project obj)
         {
             if (ModelState.IsValid)
@@ -40,6 +50,7 @@ namespace KanbanMate.Controllers
             }
 
         }
+        [Authorize]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -57,6 +68,7 @@ namespace KanbanMate.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Edit(Project obj)
         {
             if (ModelState.IsValid)
@@ -72,6 +84,7 @@ namespace KanbanMate.Controllers
 
         }
 
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -89,6 +102,7 @@ namespace KanbanMate.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult DeletePost(Project obj)
         {
             _unitOfWork.Project.Remove(obj);
