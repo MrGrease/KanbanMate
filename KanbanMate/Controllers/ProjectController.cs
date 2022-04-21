@@ -1,6 +1,7 @@
 ﻿using KanbanMate.DataAccess;
 using KanbanMate.DataAccess.Repository.IRepository;
 using KanbanMate.Models;
+using KanbanMate.Models.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -123,7 +124,13 @@ namespace KanbanMate.Controllers
             {
                 return Unauthorized();
             }
-            return View(projectFromDb);
+
+            ProjectVM VM = new ProjectVM();
+            VM.Project= projectFromDb;
+
+            //var phases = _unitOfWork.Phase
+
+            return View(VM);
         }
     }
 }
