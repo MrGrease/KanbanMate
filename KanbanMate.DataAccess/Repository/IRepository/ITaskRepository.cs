@@ -9,9 +9,9 @@ namespace KanbanMate.DataAccess.Repository.IRepository
 {
     public interface ITaskRepository : IRepository<Models.Task>
     {
-        IEnumerable<Phase> Where(string id);
+        IEnumerable<Models.Task> Where(int id);
 
-        void Update(Project obj);
+        void Update(Models.Task obj);
 
         void Save();
     }

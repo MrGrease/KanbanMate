@@ -10,9 +10,9 @@ namespace KanbanMate.DataAccess.Repository.IRepository
 {
     public interface IPhaseRepository : IRepository<Phase>
     {
-        IEnumerable<Phase> Where(string id);
+        IEnumerable<Phase> Where(int id);
 
-        void Update(Project obj);
+        void Update(Phase obj);
 
         void Save();
     }

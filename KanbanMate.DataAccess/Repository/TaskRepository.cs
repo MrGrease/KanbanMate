@@ -9,46 +9,28 @@ using System.Threading.Tasks;
 
 namespace KanbanMate.DataAccess.Repository
 {
-    public class TaskRepository : ITaskRepository
+    public class TaskRepository : Repository<Models.Task>, ITaskRepository
     {
-        public void Add(Models.Task entity)
+        private ApplicationDbContext _db;
+        public TaskRepository(ApplicationDbContext db) : base(db)
         {
-            throw new NotImplementedException();
+            _db = db;
         }
-
-        public IEnumerable<Models.Task> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Models.Task GetFirstOrDefault(Expression<Func<Models.Task, bool>> filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(Models.Task entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveRange(IEnumerable<Models.Task> entity)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Save()
         {
-            throw new NotImplementedException();
+            _db.SaveChanges();
         }
 
-        public void Update(Project obj)
+        public void Update(Models.Task obj)
         {
-            throw new NotImplementedException();
+            _db.tasks.Update(obj);
         }
 
-        public IEnumerable<Phase> Where(string id)
+        public IEnumerable<Models.Task> Where(int id)
         {
-            throw new NotImplementedException();
+            return _db.tasks.Where(x =>
+                    x.phase.Id == id).ToList();
         }
+
     }
 }
