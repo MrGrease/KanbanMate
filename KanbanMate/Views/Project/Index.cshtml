@@ -18,7 +18,7 @@
   <div class="card-body">
     <h5 class="card-title">@obj.Title</h5>
     <p class="card-text">@obj.Description</p>
-    <a href="#" class="btn btn-primary">Open</a>
+    <a class="btn btn-primary" asp-controller="Project" asp-action="Details" asp-route-id="@obj.Id">Open</a>
     <a class="btn btn-secondary" asp-controller="Project" asp-action="Edit" asp-route-id="@obj.Id">Edit</a>
      <a class="btn btn-danger" asp-controller="Project" asp-action="Delete" asp-route-id="@obj.Id">Delete</a>
   </div>

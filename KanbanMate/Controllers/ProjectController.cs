@@ -112,5 +112,18 @@ namespace KanbanMate.Controllers
             _unitOfWork.Project.Save();
                 return RedirectToAction("Index");
         }
+
+        [Authorize]
+        public IActionResult Details(int id)
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var projectFromDb = _unitOfWork.Project.Where(userId,id);
+            if (projectFromDb == null)
+            {
+                return Unauthorized();
+            }
+            return View(projectFromDb);
+        }
     }
 }

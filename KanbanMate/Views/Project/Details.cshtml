@@ -1,0 +1,12 @@
+﻿@model KanbanMate.Models.Project
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+<h1 class="col-md-11">@Model.Title</h1>
+<a class="btn btn-primary col-md-1" asp-controller="Project" asp-action="Create">Create Project</a>
+</div>
+<hr/>
+<h1>THIS IS THE DETAILS PAGE</h1>

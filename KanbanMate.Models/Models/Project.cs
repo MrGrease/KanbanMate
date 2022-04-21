@@ -2,7 +2,8 @@
 {
     public class Project
     {
-        public Project() { 
+        public Project()
+        { 
             users = new HashSet<AppUser>();
         }
         public int Id { get; set; }

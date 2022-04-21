@@ -32,5 +32,10 @@ namespace KanbanMate.DataAccess.Repository
             return _db.projects.Where(x => x.users.Any(x =>
                     x.Id == userId)).ToList();
         }
+        public Project Where(string userId,int projectId)
+        {
+            return _db.projects.Where(x => x.users.Any(x =>
+                    x.Id == userId)).Where(p => p.Id == projectId).ToList().FirstOrDefault();
+        }
     }
 }
