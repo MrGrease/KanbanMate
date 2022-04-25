@@ -54,5 +54,23 @@ namespace KanbanMate.Controllers
             }
 
         }
+
+        [Authorize]
+        public IActionResult Delete(int id)
+        {
+            var phase = _unitOfWork.phase.Get(id);
+            _unitOfWork.phase.Remove(phase);
+            List<int> ids = new List<int>();
+            ids.Add(phase.Id);
+            List<Models.Task> tasks = (List<Models.Task>)_unitOfWork.task.Where(ids);
+            for(int i = 0; i < tasks.Count(); i++)
+            {
+                _unitOfWork.task.Remove(tasks[i]);
+            }
+
+            _unitOfWork.phase.Save();
+            _unitOfWork.task.Save();
+            return Redirect(HttpContext.Request.Headers["Referer"]);
+        }
     }
 }

@@ -17,6 +17,16 @@ namespace KanbanMate.DataAccess.Repository
             _db = db;
         }
 
+        public Phase Get(int id)
+        {
+            return _db.phases.FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Remove(Phase ph)
+        {
+            _db.phases.Remove(ph);
+        }
+
         public void Save()
         {
             _db.SaveChanges();

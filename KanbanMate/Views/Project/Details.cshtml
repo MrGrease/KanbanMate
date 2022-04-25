@@ -12,7 +12,14 @@
 @foreach(var phase in Model.Phases){
 
 <div class="col card">
-<h2 class="card-title">@phase.Title</h2>
+<div class="row mt-2">
+    <div class="col-10">
+    <h2 class="card-title">@phase.Title</h2>
+    </div>
+    <div class="col-2">
+<a class="btn-outline-danger btn btn-sm" asp-controller="Phase" asp-action="Delete" asp-route-id="@phase.Id">X</a>
+</div>
+</div>
 <hr/>
 <div class="card-body">
                 @foreach(var task in Model.Tasks[phase.Id])
@@ -22,9 +29,9 @@
                         <h5 class="card-title">@task.Title</h5>
                         <p class="card-text">@task.Description</p>
                         <div class="row mx-auto text-center">
-                        <div class="col"> <a href="#" class="btn btn-primary">Move Left</a></div>
-                        <div class="col"> <a href="#" class="btn btn-danger">Delete</a></div>
-                        <div class="col"> <a href="#" class="btn btn-primary">Move Right</a></div>                        
+                        <div class="col"> <a class="btn btn-primary btn-sm" asp-controller="Task" asp-action="Left" asp-route-id="@task.Id">&lt&lt</a></div>
+                        <div class="col"> <a class="btn btn-danger btn-sm" asp-controller="Task" asp-action="Delete" asp-route-id="@task.Id">Delete</a></div>
+                        <div class="col"> <a class="btn btn-primary btn-sm" asp-controller="Task" asp-action="Right" asp-route-id="@task.Id">&gt&gt</a></div>                        
                         </div>
                       </div>
                     </div>

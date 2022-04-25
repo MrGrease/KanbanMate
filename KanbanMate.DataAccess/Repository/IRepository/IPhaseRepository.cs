@@ -12,8 +12,10 @@ namespace KanbanMate.DataAccess.Repository.IRepository
     {
         List<Phase> Where(int id);
 
+        Phase Get(int id);
         void Update(Phase obj);
 
         void Save();
+        void Remove(Phase ph);
     }
 }

@@ -13,6 +13,8 @@ namespace KanbanMate.DataAccess.Repository.IRepository
 
         void Update(Models.Task obj);
 
+        void Remove(Models.Task obj);
+
         void Save();
     }
 }

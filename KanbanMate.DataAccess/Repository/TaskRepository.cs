@@ -32,5 +32,10 @@ namespace KanbanMate.DataAccess.Repository
                     ids.Contains(x.phase.Id)).ToList();
         }
 
+        public void Remove(Models.Task obj)
+        {
+            _db.tasks.Remove(obj);
+        }
+
     }
 }
