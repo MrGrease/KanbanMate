@@ -5,7 +5,31 @@
 
 <div class="row">
 <h1 class="col-md-11">@Model.Project.Title</h1>
-<a class="btn btn-primary col-md-1" asp-controller="Project" asp-action="Create">Create Project</a>
+<a class="btn btn-primary col-md-1" asp-controller="Phase" asp-action="Create" asp-route-id="@Model.Project.Id">Create Phase</a>
 </div>
 <hr/>
-<h1>THIS IS THE DETAILS PAGE</h1>
+<div class="row">
+@foreach(var phase in Model.Phases){
+
+<div class="col card">
+<h2 class="card-title">@phase.Title</h2>
+<hr/>
+<div class="card-body">
+                @foreach(var task in Model.Tasks[phase.Id])
+                {
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">@task.Title</h5>
+                        <p class="card-text">@task.Description</p>
+                        <div class="row mx-auto text-center">
+                        <div class="col"> <a href="#" class="btn btn-primary">Move Left</a></div>
+                        <div class="col"> <a href="#" class="btn btn-danger">Delete</a></div>
+                        <div class="col"> <a href="#" class="btn btn-primary">Move Right</a></div>                        
+                        </div>
+                      </div>
+                    </div>
+                }
+</div>
+</div>
+}
+</div>

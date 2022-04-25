@@ -26,10 +26,10 @@ namespace KanbanMate.DataAccess.Repository
             _db.tasks.Update(obj);
         }
 
-        public IEnumerable<Models.Task> Where(int id)
+        public IEnumerable<Models.Task> Where(List<int> ids)
         {
             return _db.tasks.Where(x =>
-                    x.phase.Id == id).ToList();
+                    ids.Contains(x.phase.Id)).ToList();
         }
 
     }

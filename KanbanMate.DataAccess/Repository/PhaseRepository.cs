@@ -27,9 +27,9 @@ namespace KanbanMate.DataAccess.Repository
             _db.phases.Update(obj);
         }
 
-        public IEnumerable<Phase> Where(int id)
+        List<Phase> IPhaseRepository.Where(int id)
         {
-            return _db.phases.Where(x =>x.project.Id == id).ToList();
+            return _db.phases.Where(x => x.project.Id == id).ToList();
         }
     }
 }

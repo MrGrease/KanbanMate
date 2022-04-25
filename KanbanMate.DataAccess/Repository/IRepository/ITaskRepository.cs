@@ -9,7 +9,7 @@ namespace KanbanMate.DataAccess.Repository.IRepository
 {
     public interface ITaskRepository : IRepository<Models.Task>
     {
-        IEnumerable<Models.Task> Where(int id);
+        IEnumerable<Models.Task> Where(List<int> ids);
 
         void Update(Models.Task obj);
 

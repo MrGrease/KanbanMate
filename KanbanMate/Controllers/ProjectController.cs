@@ -125,10 +125,27 @@ namespace KanbanMate.Controllers
                 return Unauthorized();
             }
 
+            List<Phase> phases = _unitOfWork.phase.Where(id);
+            List<int> phaseIds=new List<int>();
+            for(int i=0;i<phases.Count();i++)
+            {
+                phaseIds.Add(phases[i].Id);
+            }
+
+            List<Models.Task> tasksList = (List<Models.Task>)_unitOfWork.task.Where(phaseIds);
+            Dictionary<int, List<Models.Task>> tasks = new Dictionary<int, List<Models.Task>>();
+            for (int i = 0; i < phaseIds.Count(); i++)
+            {
+               tasks.Add(phaseIds[i], new List<Models.Task>()); 
+            }
+            for (int i = 0; i < tasksList.Count(); i++)
+            {
+                tasks[tasksList[i].phase.Id].Add(tasksList[i]);
+            }
             ProjectVM VM = new ProjectVM();
             VM.Project= projectFromDb;
-
-            //var phases = _unitOfWork.Phase
+            VM.Phases = (List<Phase>)phases;
+            VM.Tasks = tasks;
 
             return View(VM);
         }

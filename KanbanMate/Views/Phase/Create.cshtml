@@ -1,0 +1,20 @@
+﻿@model KanbanMate.Models.Models.ViewModels.PhaseVM
+
+<h2>Create Phase</h2>
+<form method="post">
+  <div class="form-group">
+    <input hidden asp-for="projectId"/>
+    <label asp-for="phase.Title">Title</label>
+    <input asp-for="phase.Title" type="text" class="form-control" placeholder="Enter a name for this phase">
+    <span asp-validation-for="phase.Title" class="text-danger"></span>
+  </div>
+  <button type="submit" class="btn btn-primary mt-3">Create</button>
+  <a asp-controller="Project" asp-action="Details" asp-route-id="@Model.projectId" class="btn btn-danger mt-3">Cancel</a>
+</form>
+
+@section Scripts
+{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

@@ -13,8 +13,14 @@ namespace KanbanMate.DataAccess.Repository.IRepository
         {
             _db = db;
             Project = new ProjectRepository(_db);
+            phase = new PhaseRepository(_db);
+            task = new TaskRepository(_db);
         }
         public IProjectRepository Project { get; private set; }
+
+        public IPhaseRepository phase { get; private set; }
+
+        public ITaskRepository task { get; private set; }
 
         public void Save()
         {
